@@ -68,10 +68,10 @@ Vagrant.configure("2") do |config|
  	  box.vm.provision "prov1", type: "shell", inline: <<-SHELL
 	      mkdir -p ~root/.ssh
               cp ~vagrant/.ssh/auth* ~root/.ssh
-	      yum install -y mdadm smartmontools hdparm gdisk e2fsprogs
+	      yum install -y mdadm smartmontools hdparm gdisk e2fsprogs nano
 
       SHELL
-box.vm.provision "shell", path: "raid.sh"
+      box.vm.provision "shell", path: "raid.sh"
       end
   end
 end
