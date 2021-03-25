@@ -1,6 +1,8 @@
+#!/bin/bash
+
 mdadm --zero-superblock --force /dev/sd{b,c,d,e,f}
 
-mdadm --create --verbose /dev/md0 -l 6 -n 5 /dev/sd{b,c,d,e,f}
+mdadm --create --verbose /dev/md0 -l 5 -n 5 /dev/sd{b,c,d,e,f}
 
 cat /proc/mdstat
 
@@ -12,8 +14,7 @@ mkdir /etc/mdadm
 
 echo "DEVICE partitions" > /etc/mdadm/mdadm.conf
 
-mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >>
-/etc/mdadm/mdadm.conf
+mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
 
 mdadm /dev/md0 --fail /dev/sde
 
@@ -42,3 +43,6 @@ for i in $(seq 1 5); do sudo mkfs.ext4 /dev/md0p$i; done
 mkdir -p /raid/part{1,2,3,4,5}
 
 for i in $(seq 1 5); do mount /dev/md0p$i /raid/part$i; done
+
+echo "#NEW DEVICE" >> /etc/fstab
+for i in $(seq 1 5); do echo `sudo blkid /dev/md0p$i | awk '{print $2}'` /u0$i ext4 defaults 0 0 >> /etc/fstab; done
