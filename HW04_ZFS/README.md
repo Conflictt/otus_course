@@ -27,6 +27,7 @@
 Лучше всех справился gzip
 
 Определить настройки pool
+```
 zfs get all | grep otus | grep ' available \| type \| recordsize \| compression \| checksum'
 otus                type                  filesystem             -
 otus                available             350M                   -
@@ -38,6 +39,7 @@ otus/hometask2      available             350M                   -
 otus/hometask2      recordsize            128K                   inherited from otus
 otus/hometask2      checksum              sha256                 inherited from otus
 otus/hometask2      compression           zle                    inherited from otus
+```
 
-Найти сообщение от преподавателей
-результат https://github.com/sindresorhus/awesome
+Найти сообщение от преподавателей:
+- результат https://github.com/sindresorhus/awesome
