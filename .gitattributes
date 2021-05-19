@@ -1,0 +1,7 @@
+# Auto detect text files and perform LF normalization
+#* text=auto
+# Определение типа файлов и применение к ним соответствующего форматирования
+*.txt text
+*.html text
+*.css text
+*.js text
