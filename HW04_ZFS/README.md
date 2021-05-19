@@ -3,12 +3,12 @@
 Лог выполнения команд: https://github.com/Conflictt/Otus_course/blob/main/HW04_ZFS/cli_log
 
 Установка zfs
-`yum install -y http://download.zfsonlinux.org/epel/zfs-release.el7_8.noarch.rpm`
-`gpg --quiet --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux`
-yum-config-manager --enable zfs-kmod
-yum-config-manager --disable zfs
-yum install -y zfs
-/sbin/modprobe zfs
+- `yum install -y http://download.zfsonlinux.org/epel/zfs-release.el7_8.noarch.rpm`
+- `gpg --quiet --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux`
+- `yum-config-manager --enable zfs-kmod`
+- `yum-config-manager --disable zfs`
+- `yum install -y zfs`
+- `sbin/modprobe zfs`
 
 Определение алгоритма с наилучшим сжатием
 zfs get compressratio,compression /zfs_001/zfs_fs_00{1..4}
