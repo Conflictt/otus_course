@@ -1,6 +1,6 @@
 Домашняя работа ZFS
 
-Лог выполнения команд: cli_log
+Лог выполнения команд: https://github.com/Conflictt/Otus_course/blob/main/HW04_ZFS/cli_log
 
 Установка zfs
 yum install -y http://download.zfsonlinux.org/epel/zfs-release.el7_8.noarch.rpm
