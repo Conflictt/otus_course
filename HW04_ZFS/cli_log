@@ -1,0 +1,464 @@
+PS D:\Git_project\Otus_course\HW04_ZFS> vagrant ssh
+[vagrant@otuslinux ~]$ cat /etc/redhat-release
+CentOS Linux release 7.8.2003 (Core)
+[vagrant@otuslinux ~]$ yum install -y http://download.zfsonlinux.org/epel/zfs-release.el7_8.noarch.rpm
+Loaded plugins: fastestmirror
+You need to be root to perform this command.
+[vagrant@otuslinux ~]$ sudo su
+[root@otuslinux vagrant]# yum install -y http://download.zfsonlinux.org/epel/zfs-release.el7_8.noarch.rpm
+Loaded plugins: fastestmirror
+zfs-release.el7_8.noarch.rpm                                                                                                                                                                                             | 5.3 kB  00:00:00
+Examining /var/tmp/yum-root-0aibrJ/zfs-release.el7_8.noarch.rpm: zfs-release-1-7.8.noarch
+Marking /var/tmp/yum-root-0aibrJ/zfs-release.el7_8.noarch.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package zfs-release.noarch 0:1-7.8 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================================================================================================
+ Package                                                  Arch                                                Version                                              Repository                                                              Size
+================================================================================================================================================================================================================================================
+Installing:
+ zfs-release                                              noarch                                              1-7.8                                                /zfs-release.el7_8.noarch                                              2.9 k
+
+Transaction Summary
+================================================================================================================================================================================================================================================
+Install  1 Package
+
+Total size: 2.9 k
+Installed size: 2.9 k
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : zfs-release-1-7.8.noarch                                                                                                                                                                                                     1/1
+  Verifying  : zfs-release-1-7.8.noarch                                                                                                                                                                                                     1/1
+
+Installed:
+  zfs-release.noarch 0:1-7.8
+
+Complete!
+[root@otuslinux vagrant]# gpg --quiet --with-fingerprint /etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux
+gpg: new configuration file `/root/.gnupg/gpg.conf' created
+gpg: WARNING: options in `/root/.gnupg/gpg.conf' are not yet active during this run
+pub  2048R/F14AB620 2013-03-21 ZFS on Linux <zfs@zfsonlinux.org>
+      Key fingerprint = C93A FFFD 9F3F 7B03 C310  CEB6 A9D5 A1C0 F14A B620
+sub  2048R/99685629 2013-03-21
+[root@otuslinux vagrant]# yum-config-manager --enable zfs-kmod
+Loaded plugins: fastestmirror
+================================================================================================================ repo: zfs-kmod ================================================================================================================
+[zfs-kmod]
+async = True
+bandwidth = 0
+base_persistdir = /var/lib/yum/repos/x86_64/7
+baseurl = http://download.zfsonlinux.org/epel/7.8/kmod/x86_64/
+cache = 0
+cachedir = /var/cache/yum/x86_64/7/zfs-kmod
+check_config_file_age = True
+compare_providers_priority = 80
+cost = 1000
+deltarpm_metadata_percentage = 100
+deltarpm_percentage =
+enabled = 1
+enablegroups = True
+exclude =
+failovermethod = priority
+ftp_disable_epsv = False
+gpgcadir = /var/lib/yum/repos/x86_64/7/zfs-kmod/gpgcadir
+gpgcakey =
+gpgcheck = True
+gpgdir = /var/lib/yum/repos/x86_64/7/zfs-kmod/gpgdir
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux
+hdrdir = /var/cache/yum/x86_64/7/zfs-kmod/headers
+http_caching = all
+includepkgs =
+ip_resolve =
+keepalive = True
+keepcache = False
+mddownloadpolicy = sqlite
+mdpolicy = group:small
+mediaid =
+metadata_expire = 604800
+metadata_expire_filter = read-only:present
+metalink =
+minrate = 0
+mirrorlist =
+mirrorlist_expire = 86400
+name = ZFS on Linux for EL7 - kmod
+old_base_cache_dir =
+password =
+persistdir = /var/lib/yum/repos/x86_64/7/zfs-kmod
+pkgdir = /var/cache/yum/x86_64/7/zfs-kmod/packages
+proxy = False
+proxy_dict =
+proxy_password =
+proxy_username =
+repo_gpgcheck = False
+retries = 10
+skip_if_unavailable = False
+ssl_check_cert_permissions = True
+sslcacert =
+sslclientcert =
+sslclientkey =
+sslverify = True
+throttle = 0
+timeout = 30.0
+ui_id = zfs-kmod/x86_64
+ui_repoid_vars = releasever,
+   basearch
+username =
+
+[root@otuslinux vagrant]# yum-config-manager --disable zfs
+Loaded plugins: fastestmirror
+================================================================================================================== repo: zfs ===================================================================================================================
+[zfs]
+async = True
+bandwidth = 0
+base_persistdir = /var/lib/yum/repos/x86_64/7
+baseurl = http://download.zfsonlinux.org/epel/7.8/x86_64/
+cache = 0
+cachedir = /var/cache/yum/x86_64/7/zfs
+check_config_file_age = True
+compare_providers_priority = 80
+cost = 1000
+deltarpm_metadata_percentage = 100
+deltarpm_percentage =
+enabled = 0
+enablegroups = True
+exclude =
+failovermethod = priority
+ftp_disable_epsv = False
+gpgcadir = /var/lib/yum/repos/x86_64/7/zfs/gpgcadir
+gpgcakey =
+gpgcheck = True
+gpgdir = /var/lib/yum/repos/x86_64/7/zfs/gpgdir
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux
+hdrdir = /var/cache/yum/x86_64/7/zfs/headers
+http_caching = all
+includepkgs =
+ip_resolve =
+keepalive = True
+keepcache = False
+mddownloadpolicy = sqlite
+mdpolicy = group:small
+mediaid =
+metadata_expire = 604800
+metadata_expire_filter = read-only:present
+metalink =
+minrate = 0
+mirrorlist =
+mirrorlist_expire = 86400
+name = ZFS on Linux for EL7 - dkms
+old_base_cache_dir =
+password =
+persistdir = /var/lib/yum/repos/x86_64/7/zfs
+pkgdir = /var/cache/yum/x86_64/7/zfs/packages
+proxy = False
+proxy_dict =
+proxy_password =
+proxy_username =
+repo_gpgcheck = False
+retries = 10
+skip_if_unavailable = False
+ssl_check_cert_permissions = True
+sslcacert =
+sslclientcert =
+sslclientkey =
+sslverify = True
+throttle = 0
+timeout = 30.0
+ui_id = zfs/x86_64
+ui_repoid_vars = releasever,
+   basearch
+username =
+
+[root@otuslinux vagrant]# yum install -y zfs
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.bytes.ua
+ * extras: mirrors.bytes.ua
+ * updates: mirrors.bytes.ua
+zfs-kmod                                                                                                                                                                                                                 | 2.9 kB  00:00:00
+zfs-kmod/x86_64/primary_db                                                                                                                                                                                               |  82 kB  00:00:00
+Resolving Dependencies
+--> Running transaction check
+---> Package zfs.x86_64 0:0.8.5-1.el7 will be installed
+--> Processing Dependency: zfs-kmod = 0.8.5 for package: zfs-0.8.5-1.el7.x86_64
+--> Processing Dependency: libzpool2 = 0.8.5 for package: zfs-0.8.5-1.el7.x86_64
+--> Processing Dependency: libzfs2 = 0.8.5 for package: zfs-0.8.5-1.el7.x86_64
+--> Processing Dependency: libuutil1 = 0.8.5 for package: zfs-0.8.5-1.el7.x86_64
+--> Processing Dependency: libnvpair1 = 0.8.5 for package: zfs-0.8.5-1.el7.x86_64
+--> Processing Dependency: sysstat for package: zfs-0.8.5-1.el7.x86_64
+--> Processing Dependency: libzpool.so.2()(64bit) for package: zfs-0.8.5-1.el7.x86_64
+--> Processing Dependency: libzfs_core.so.1()(64bit) for package: zfs-0.8.5-1.el7.x86_64
+--> Processing Dependency: libzfs.so.2()(64bit) for package: zfs-0.8.5-1.el7.x86_64
+--> Processing Dependency: libuutil.so.1()(64bit) for package: zfs-0.8.5-1.el7.x86_64
+--> Processing Dependency: libnvpair.so.1()(64bit) for package: zfs-0.8.5-1.el7.x86_64
+--> Running transaction check
+---> Package kmod-zfs.x86_64 0:0.8.5-1.el7 will be installed
+---> Package libnvpair1.x86_64 0:0.8.5-1.el7 will be installed
+---> Package libuutil1.x86_64 0:0.8.5-1.el7 will be installed
+---> Package libzfs2.x86_64 0:0.8.5-1.el7 will be installed
+---> Package libzpool2.x86_64 0:0.8.5-1.el7 will be installed
+---> Package sysstat.x86_64 0:10.1.5-19.el7 will be installed
+--> Processing Dependency: libsensors.so.4()(64bit) for package: sysstat-10.1.5-19.el7.x86_64
+--> Running transaction check
+---> Package lm_sensors-libs.x86_64 0:3.4.0-8.20160601gitf9185e5.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================================================================================================
+ Package                                                   Arch                                             Version                                                                    Repository                                          Size
+================================================================================================================================================================================================================================================
+Installing:
+ zfs                                                       x86_64                                           0.8.5-1.el7                                                                zfs-kmod                                           486 k
+Installing for dependencies:
+ kmod-zfs                                                  x86_64                                           0.8.5-1.el7                                                                zfs-kmod                                           1.1 M
+ libnvpair1                                                x86_64                                           0.8.5-1.el7                                                                zfs-kmod                                            32 k
+ libuutil1                                                 x86_64                                           0.8.5-1.el7                                                                zfs-kmod                                            26 k
+ libzfs2                                                   x86_64                                           0.8.5-1.el7                                                                zfs-kmod                                           208 k
+ libzpool2                                                 x86_64                                           0.8.5-1.el7                                                                zfs-kmod                                           861 k
+ lm_sensors-libs                                           x86_64                                           3.4.0-8.20160601gitf9185e5.el7                                             base                                                42 k
+ sysstat                                                   x86_64                                           10.1.5-19.el7                                                              base                                               315 k
+
+Transaction Summary
+================================================================================================================================================================================================================================================
+Install  1 Package (+7 Dependent packages)
+
+Total download size: 3.0 M
+Installed size: 11 M
+Downloading packages:
+(1/8): libnvpair1-0.8.5-1.el7.x86_64.rpm                                                                                                                                                                                 |  32 kB  00:00:00
+(2/8): libuutil1-0.8.5-1.el7.x86_64.rpm                                                                                                                                                                                  |  26 kB  00:00:00
+(3/8): libzfs2-0.8.5-1.el7.x86_64.rpm                                                                                                                                                                                    | 208 kB  00:00:00
+(4/8): lm_sensors-libs-3.4.0-8.20160601gitf9185e5.el7.x86_64.rpm                                                                                                                                                         |  42 kB  00:00:00
+(5/8): sysstat-10.1.5-19.el7.x86_64.rpm                                                                                                                                                                                  | 315 kB  00:00:00
+(6/8): kmod-zfs-0.8.5-1.el7.x86_64.rpm                                                                                                                                                                                   | 1.1 MB  00:00:03
+(7/8): libzpool2-0.8.5-1.el7.x86_64.rpm                                                                                                                                                                                  | 861 kB  00:00:03
+(8/8): zfs-0.8.5-1.el7.x86_64.rpm                                                                                                                                                                                        | 486 kB  00:00:01
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                                                                                           561 kB/s | 3.0 MB  00:00:05
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : libnvpair1-0.8.5-1.el7.x86_64                                                                                                                                                                                                1/8
+  Installing : libuutil1-0.8.5-1.el7.x86_64                                                                                                                                                                                                 2/8
+  Installing : libzfs2-0.8.5-1.el7.x86_64                                                                                                                                                                                                   3/8
+  Installing : libzpool2-0.8.5-1.el7.x86_64                                                                                                                                                                                                 4/8
+  Installing : lm_sensors-libs-3.4.0-8.20160601gitf9185e5.el7.x86_64                                                                                                                                                                        5/8
+  Installing : sysstat-10.1.5-19.el7.x86_64                                                                                                                                                                                                 6/8
+  Installing : kmod-zfs-0.8.5-1.el7.x86_64                                                                                                                                                                                                  7/8
+  Installing : zfs-0.8.5-1.el7.x86_64                                                                                                                                                                                                       8/8
+  Verifying  : sysstat-10.1.5-19.el7.x86_64                                                                                                                                                                                                 1/8
+  Verifying  : libuutil1-0.8.5-1.el7.x86_64                                                                                                                                                                                                 2/8
+  Verifying  : libzfs2-0.8.5-1.el7.x86_64                                                                                                                                                                                                   3/8
+  Verifying  : zfs-0.8.5-1.el7.x86_64                                                                                                                                                                                                       4/8
+  Verifying  : kmod-zfs-0.8.5-1.el7.x86_64                                                                                                                                                                                                  5/8
+  Verifying  : libnvpair1-0.8.5-1.el7.x86_64                                                                                                                                                                                                6/8
+  Verifying  : lm_sensors-libs-3.4.0-8.20160601gitf9185e5.el7.x86_64                                                                                                                                                                        7/8
+  Verifying  : libzpool2-0.8.5-1.el7.x86_64                                                                                                                                                                                                 8/8
+
+Installed:
+  zfs.x86_64 0:0.8.5-1.el7
+
+Dependency Installed:
+  kmod-zfs.x86_64 0:0.8.5-1.el7      libnvpair1.x86_64 0:0.8.5-1.el7     libuutil1.x86_64 0:0.8.5-1.el7     libzfs2.x86_64 0:0.8.5-1.el7     libzpool2.x86_64 0:0.8.5-1.el7     lm_sensors-libs.x86_64 0:3.4.0-8.20160601gitf9185e5.el7
+  sysstat.x86_64 0:10.1.5-19.el7
+
+Complete!
+[root@otuslinux vagrant]# /sbin/modprobe zfs
+[root@otuslinux vagrant]# zpool create zfs_001 mirror sdb sdc
+[root@otuslinux vagrant]# zfs list
+NAME      USED  AVAIL     REFER  MOUNTPOINT
+zfs_001  82.5K   112M       24K  /zfs_001
+[root@otuslinux vagrant]# zfs create zfs_001/zfs_fs_001
+[root@otuslinux vagrant]# zfs create zfs_001/zfs_fs_002
+[root@otuslinux vagrant]# zfs create zfs_001/zfs_fs_003
+[root@otuslinux vagrant]# zfs create zfs_001/zfs_fs_004
+[root@otuslinux vagrant]# zfs set compression=lzjb zfs_001/zfs_fs_001
+[root@otuslinux vagrant]# zfs set compression=gzip zfs_001/zfs_fs_002
+[root@otuslinux vagrant]# zfs set compression=zle zfs_001/zfs_fs_003
+[root@otuslinux vagrant]# zfs set compression=lz4 zfs_001/zfs_fs_004
+[root@otuslinux vagrant]# for i in {1..50}; do echo "Download $i/50 book"; wget -qO /zfs_001/zfs_fs_001/$i.txt http://www.gutenberg.org/ebooks/$i.txt.utf-8; done
+Download 1/50 book
+Download 2/50 book
+Download 3/50 book
+Download 4/50 book
+Download 5/50 book
+Download 6/50 book
+Download 7/50 book
+Download 8/50 book
+Download 9/50 book
+Download 10/50 book
+Download 11/50 book
+Download 12/50 book
+Download 13/50 book
+Download 14/50 book
+Download 15/50 book
+Download 16/50 book
+Download 17/50 book
+Download 18/50 book
+Download 19/50 book
+Download 20/50 book
+Download 21/50 book
+Download 22/50 book
+Download 23/50 book
+Download 24/50 book
+Download 25/50 book
+Download 26/50 book
+Download 27/50 book
+Download 28/50 book
+Download 29/50 book
+Download 30/50 book
+Download 31/50 book
+Download 32/50 book
+Download 33/50 book
+Download 34/50 book
+Download 35/50 book
+Download 36/50 book
+Download 37/50 book
+Download 38/50 book
+Download 39/50 book
+Download 40/50 book
+Download 41/50 book
+Download 42/50 book
+Download 43/50 book
+Download 44/50 book
+Download 45/50 book
+Download 46/50 book
+Download 47/50 book
+Download 48/50 book
+Download 49/50 book
+Download 50/50 book
+[root@otuslinux vagrant]# cp /zfs_001/zfs_fs_001/* /zfs_001/zfs_fs_002
+[root@otuslinux vagrant]# cp /zfs_001/zfs_fs_001/* /zfs_001/zfs_fs_003
+[root@otuslinux vagrant]# cp /zfs_001/zfs_fs_001/* /zfs_001/zfs_fs_004
+[root@otuslinux vagrant]# zfs list
+NAME                 USED  AVAIL     REFER  MOUNTPOINT
+zfs_001             66.8M  45.1M       28K  /zfs_001
+zfs_001/zfs_fs_001  17.7M  45.1M     17.7M  /zfs_001/zfs_fs_001
+zfs_001/zfs_fs_002  11.0M  45.1M     11.0M  /zfs_001/zfs_fs_002
+zfs_001/zfs_fs_003  23.0M  45.1M     23.0M  /zfs_001/zfs_fs_003
+zfs_001/zfs_fs_004  14.8M  45.1M     14.8M  /zfs_001/zfs_fs_004
+[root@otuslinux vagrant]# zfs get compressratio,compression /zfs_001/zfs_fs_00{1..4}
+NAME                PROPERTY       VALUE     SOURCE
+zfs_001/zfs_fs_001  compressratio  1.37x     -
+zfs_001/zfs_fs_001  compression    lzjb      local
+zfs_001/zfs_fs_002  compressratio  2.21x     -
+zfs_001/zfs_fs_002  compression    gzip      local
+zfs_001/zfs_fs_003  compressratio  1.05x     -
+zfs_001/zfs_fs_003  compression    zle       local
+zfs_001/zfs_fs_004  compressratio  1.63x     -
+zfs_001/zfs_fs_004  compression    lz4       local
+[root@otuslinux vagrant]# wget -qO zfs_task1.tar.gz "https://drive.google.com/u/0/uc?id=1KRBNW33QWqbvbVHa3hLJivOAt60yukkg&export=download"
+[root@otuslinux vagrant]# tar -xvf zfs_task1.tar.gz
+zpoolexport/
+zpoolexport/filea
+zpoolexport/fileb
+[root@otuslinux vagrant]# ls -l
+total 7108
+-rw-r--r--. 1 root root 7275140 May 19 19:35 zfs_task1.tar.gz
+drwxr-xr-x. 2 root root      32 May 15  2020 zpoolexport
+[root@otuslinux vagrant]# ls -l zpoolexport/
+total 1024000
+-rw-r--r--. 1 root root 524288000 May 15  2020 filea
+-rw-r--r--. 1 root root 524288000 May 15  2020 fileb
+[root@otuslinux vagrant]# zpool import -d ./zpoolexport/
+   pool: otus
+     id: 6554193320433390805
+  state: ONLINE
+ action: The pool can be imported using its name or numeric identifier.
+ config:
+
+        otus                                 ONLINE
+          mirror-0                           ONLINE
+            /home/vagrant/zpoolexport/filea  ONLINE
+            /home/vagrant/zpoolexport/fileb  ONLINE
+[root@otuslinux vagrant]# zpool import -d ./zpoolexport/ otus
+[root@otuslinux vagrant]# zpool list
+NAME      SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  ALTROOT
+otus      480M  2.21M   478M        -         -     0%     0%  1.00x    ONLINE  -
+zfs_001   224M  66.9M   157M        -         -    10%    29%  1.00x    ONLINE  -
+[root@otuslinux vagrant]# zpool status
+  pool: otus
+ state: ONLINE
+  scan: none requested
+config:
+
+        NAME                                 STATE     READ WRITE CKSUM
+        otus                                 ONLINE       0     0     0
+          mirror-0                           ONLINE       0     0     0
+            /home/vagrant/zpoolexport/filea  ONLINE       0     0     0
+            /home/vagrant/zpoolexport/fileb  ONLINE       0     0     0
+
+errors: No known data errors
+
+  pool: zfs_001
+ state: ONLINE
+  scan: none requested
+config:
+
+        NAME        STATE     READ WRITE CKSUM
+        zfs_001     ONLINE       0     0     0
+          mirror-0  ONLINE       0     0     0
+            sdb     ONLINE       0     0     0
+            sdc     ONLINE       0     0     0
+
+errors: No known data errors
+[root@otuslinux vagrant]# df
+Filesystem         1K-blocks    Used Available Use% Mounted on
+devtmpfs              499864       0    499864   0% /dev
+tmpfs                 507380       0    507380   0% /dev/shm
+tmpfs                 507380    6840    500540   2% /run
+tmpfs                 507380       0    507380   0% /sys/fs/cgroup
+/dev/sda1           41921540 5285848  36635692  13% /
+tmpfs                 101480       0    101480   0% /run/user/1000
+zfs_001                46208     128     46080   1% /zfs_001
+zfs_001/zfs_fs_001     64256   18176     46080  29% /zfs_001/zfs_fs_001
+zfs_001/zfs_fs_002     57344   11264     46080  20% /zfs_001/zfs_fs_002
+zfs_001/zfs_fs_003     69632   23552     46080  34% /zfs_001/zfs_fs_003
+zfs_001/zfs_fs_004     61440   15360     46080  25% /zfs_001/zfs_fs_004
+otus                  358400     128    358272   1% /otus
+otus/hometask2        360320    2048    358272   1% /otus/hometask2
+[root@otuslinux vagrant]# zpool list -o name,size
+NAME      SIZE
+otus      480M
+zfs_001   224M
+[root@otuslinux vagrant]# zfs list -o name,avail | grep otus
+otus                 350M
+otus/hometask2       350M
+[root@otuslinux vagrant]# zfs get all | grep otus | grep ' available \| type \| recordsize \| compression \| checksum'
+otus                type                  filesystem             -
+otus                available             350M                   -
+otus                recordsize            128K                   local
+otus                checksum              sha256                 local
+otus                compression           zle                    local
+otus/hometask2      type                  filesystem             -
+otus/hometask2      available             350M                   -
+otus/hometask2      recordsize            128K                   inherited from otus
+otus/hometask2      checksum              sha256                 inherited from otus
+otus/hometask2      compression           zle                    inherited from otus
+[root@otuslinux vagrant]# wget -qO otus_task2.file "https://drive.google.com/u/0/uc?id=1gH8gCL9y7Nd5Ti3IRmplZPF1XjzxeRAG&export=download"
+[root@otuslinux vagrant]# ls -la
+total 12428
+drwx------. 4 vagrant vagrant     140 May 19 19:38 .
+drwxr-xr-x. 3 root    root         21 Apr 30  2020 ..
+-rw-r--r--. 1 vagrant vagrant      18 Apr  1  2020 .bash_logout
+-rw-r--r--. 1 vagrant vagrant     193 Apr  1  2020 .bash_profile
+-rw-r--r--. 1 vagrant vagrant     231 Apr  1  2020 .bashrc
+-rw-r--r--. 1 root    root    5432736 May 19 19:38 otus_task2.file
+drwx------. 2 vagrant vagrant      29 May 19 19:23 .ssh
+-rw-r--r--. 1 root    root    7275140 May 19 19:35 zfs_task1.tar.gz
+drwxr-xr-x. 2 root    root         32 May 15  2020 zpoolexport
+[root@otuslinux vagrant]# zfs receive otus/storage@task2 < otus_task2.file
+[root@otuslinux vagrant]# zfs rollback otus/storage@task2
+[root@otuslinux vagrant]# ls /otus/storage/task1/file_mess/secret_message
+/otus/storage/task1/file_mess/secret_message
+[root@otuslinux vagrant]# cat /otus/storage/task1/file_mess/secret_message
+https://github.com/sindresorhus/awesome
+[root@otuslinux vagrant]#
