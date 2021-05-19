@@ -11,8 +11,9 @@
 - `sbin/modprobe zfs`
 
 Определение алгоритма с наилучшим сжатием
-- `zfs get compressratio,compression /zfs_001/zfs_fs_00{1..4}`
-    NAME                PROPERTY       VALUE     SOURCE
+`zfs get compressratio,compression /zfs_001/zfs_fs_00{1..4}`
+ ```
+ NAME                PROPERTY       VALUE     SOURCE
     zfs_001/zfs_fs_001  compressratio  1.37x     -
     zfs_001/zfs_fs_001  compression    lzjb      local
     zfs_001/zfs_fs_002  compressratio  2.21x     -
@@ -21,6 +22,7 @@
     zfs_001/zfs_fs_003  compression    zle       local
     zfs_001/zfs_fs_004  compressratio  1.63x     -
     zfs_001/zfs_fs_004  compression    lz4       local
+ ```
 
 Лучше всех справился gzip
 
