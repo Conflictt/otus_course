@@ -11,7 +11,7 @@
 - `sbin/modprobe zfs`
 
 Определение алгоритма с наилучшим сжатием
-`zfs get compressratio,compression /zfs_001/zfs_fs_00{1..4}`
+- `zfs get compressratio,compression /zfs_001/zfs_fs_00{1..4}`
  ```
  NAME                PROPERTY       VALUE     SOURCE
     zfs_001/zfs_fs_001  compressratio  1.37x     -
