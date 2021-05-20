@@ -22,12 +22,13 @@
 
 В конце строки начинающейся с linux16 добавляем rd.break и нажимаем сtrl-x для загрузки в систему
 После загрузки в систему попадаем в emergency mode. Чтобы попасть в корневую файловую систему и сменить пароль админа нужна выполнить следующие команды:
-'''
+
+```
 - mount -o remount,rw /sysroot
 - chroot /sysroot
 - passwd root
 - touch /.autorelabel
-'''
+```
 
 ![alt text](screenshots/5.bmp)
 
