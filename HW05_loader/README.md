@@ -5,4 +5,4 @@
 Во всех способах нужно также удалять строку 'console=ttyS0,115200n8'
 
 Способ 1. 'init=/bin/sh'
-Otus_course/HW05_loader/screenshots/1.bmp
+![alt text](screenshots/1.bmp "Описание будет тут")
