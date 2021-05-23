@@ -1,9 +1,11 @@
 Домашняя работа
 
 Загрузим SRPM пакет NGINX для дальнейшей работы над ним
+
 `wget https://nginx.org/packages/centos/7/SRPMS/nginx-1.20.0-1.el7.ngx.src.rpm`
 
 Устанавливаем пакет
+
 `rpm -i nginx-1.20.0-1.el7.ngx.src.rpm`
 
 Качаем исходники для openssl
@@ -51,15 +53,19 @@
 `sudo cp -f /vagrant/default.conf /etc/nginx/conf.d/default.conf`
 
 Проверяем синтаксис
+
 `nginx -t`
 
 Перезапускаем NGINX
+
 `nginx -s reload`
 
 Курл на страничку
+
 `curl -a http://localhost/repo/`
 
 Добавляем репозирторий
+
 ```
 cat >> /etc/yum.repos.d/otus.repo << EOF
 [otus]
@@ -69,7 +75,9 @@ gpgcheck=0
 enabled=1
 EOF
 ```
+
 Убеждаемся наличию репозитория и пакетов в Инициализируем
+
 ```
 yum repolist enabled | grep otus
 
