@@ -31,6 +31,7 @@ mkdir /usr/share/nginx/html/repo
 cp -r /root/rpmbuild/RPMS/x86_64/nginx-1.20.0-1.el7.ngx.x86_64.rpm /usr/share/nginx/html/repo/
 # Скачиваем rpm  Percona-server
 wget http://www.percona.com/downloads/percona-release/redhat/1.0-26/percona-release-1.0-26.noarch.rpm -O /usr/share/nginx/html/repo/percona-release-1.0-26.noarch.rpm
+cp /root/percona-release-1.0-26.noarch.rpm /usr/share/nginx/html/repo/
 # Инициализируем репозиторий
 createrepo /usr/share/nginx/html/repo/
 createrepo --update /usr/share/nginx/html/repo/
