@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Загрузим SRPM пакет NGINX для дальнейшей работы над ним:
 sudo -i
+yum update
 wget https://nginx.org/packages/centos/7/SRPMS/nginx-1.20.0-1.el7.ngx.src.rpm
 # При установке такого пакета в домашней директории создается древо каталогов для сборки:
 rpm -i nginx-1.20.0-1.el7.ngx.src.rpm
@@ -11,7 +12,8 @@ tar -xvf latest.tar.gz
 # Устанавливаем зависимости
 yum-builddep -y rpmbuild/SPECS/nginx.spec
 # Замена SPEC файла
-cp -f /vagrant/nginx.spec /root/rpmbuild/SPECS/nginx.speс
+rm -rf /root/rpmbuild/SPECS/{*,.*}
+cp /vagrant/nginx.spec /root/rpmbuild/SPECS/nginx.speс
 # Собираем пакет
 rpmbuild -bb /root/rpmbuild/SPECS/nginx.speс
 # Убеждаемся что пакет создан
@@ -23,7 +25,7 @@ systemctl start nginx
 # Проверяем
 systemctl status nginx
 # Создадим каталог repo
-rm /usr/share/nginx/html/*
+rm -rf /usr/share/nginx/html/*
 mkdir /usr/share/nginx/html/repo
 # Копируем  собранный RPM
 cp -r /root/rpmbuild/RPMS/x86_64/nginx-1.20.0-1.el7.ngx.x86_64.rpm /usr/share/nginx/html/repo/
