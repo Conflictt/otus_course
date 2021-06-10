@@ -1,0 +1,25 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "centos/7"
+
+  config.vm.provider :virtualbox do |v|
+    #v.name = "rpm_hw"
+    v.customize ["modifyvm", :id, "--memory", "2048"]
+    v.customize ["modifyvm", :id, "--cpus", "2"]
+  end
+
+  #config.vm.network :private_network, ip: "192.168.60.100"
+  #config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  config.vm.provision "prov1", type: "shell", inline: <<-SHELL
+  #sudo yum -y update upgrade
+  yum install -y mc nano mailx
+  sudo mkdir /var/log/parser && sudo chown vagrant /var/log/parser
+  SHELL
+
+  #config.vm.provision :shell, path: "bash.sh"
+
+end
