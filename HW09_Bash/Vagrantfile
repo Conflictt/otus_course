@@ -17,7 +17,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "prov1", type: "shell", inline: <<-SHELL
   #sudo yum -y update upgrade
   yum install -y mc nano mailx
-  sudo mkdir /var/log/parser && sudo chown vagrant /var/log/parser
   SHELL
 
   #config.vm.provision :shell, path: "bash.sh"
